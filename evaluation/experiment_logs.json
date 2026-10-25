@@ -1,0 +1,288 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-25 19:01:47",
+    "problem_id": "C21",
+    "evaluator": "VeriSight Automated Evaluation Engine",
+    "weights_used": {
+      "numerical_faithfulness": 0.35,
+      "plain_language_clarity": 0.2,
+      "chart_appropriateness": 0.2,
+      "anomaly_detection": 0.15,
+      "responsible_ai": 0.1
+    },
+    "total_evaluations": 9
+  },
+  "version_summary": {
+    "v1_baseline": {
+      "version_name": "v1_baseline",
+      "overall_aggregate_score_pct": 41.47,
+      "dimension_averages_1_to_5": {
+        "numerical_faithfulness": 2.23,
+        "plain_language_clarity": 2.87,
+        "chart_appropriateness": 1.6,
+        "anomaly_detection": 1.77,
+        "responsible_ai": 1.33
+      },
+      "total_hallucinations_logged": 6,
+      "average_latency_seconds": 0.351
+    },
+    "v2_structured": {
+      "version_name": "v2_structured",
+      "overall_aggregate_score_pct": 75.53,
+      "dimension_averages_1_to_5": {
+        "numerical_faithfulness": 3.83,
+        "plain_language_clarity": 4.2,
+        "chart_appropriateness": 4.07,
+        "anomaly_detection": 3.43,
+        "responsible_ai": 2.67
+      },
+      "total_hallucinations_logged": 4,
+      "average_latency_seconds": 0.352
+    },
+    "v3_chained_pipeline": {
+      "version_name": "v3_chained_pipeline",
+      "overall_aggregate_score_pct": 98.9,
+      "dimension_averages_1_to_5": {
+        "numerical_faithfulness": 5.0,
+        "plain_language_clarity": 4.9,
+        "chart_appropriateness": 5.0,
+        "anomaly_detection": 4.9,
+        "responsible_ai": 4.8
+      },
+      "total_hallucinations_logged": 0,
+      "average_latency_seconds": 1.437
+    }
+  },
+  "detailed_experiments": [
+    {
+      "version": "v1_baseline",
+      "dataset_id": "test_1",
+      "dataset_name": "Retail Sales & Bulk Outlier",
+      "scores_1_to_5": {
+        "numerical_faithfulness": 2.2,
+        "plain_language_clarity": 2.8,
+        "chart_appropriateness": 1.5,
+        "anomaly_detection": 1.5,
+        "responsible_ai": 1.0
+      },
+      "weighted_aggregate_score_pct": 39.1,
+      "hallucinations_detected_count": 2,
+      "hallucinations_log": [
+        {
+          "claim": "Average order revenue was $340.50",
+          "ground_truth": "$920.18",
+          "type": "OUTLIER_BLINDNESS_HALLUCINATION"
+        },
+        {
+          "claim": "All 35 orders had customer ratings",
+          "ground_truth": "1 missing rating (row 8)",
+          "type": "MISSED_MISSING_VALUE"
+        }
+      ],
+      "stage_timings": {},
+      "latency_seconds": 0.351
+    },
+    {
+      "version": "v2_structured",
+      "dataset_id": "test_1",
+      "dataset_name": "Retail Sales & Bulk Outlier",
+      "scores_1_to_5": {
+        "numerical_faithfulness": 3.8,
+        "plain_language_clarity": 4.2,
+        "chart_appropriateness": 4.0,
+        "anomaly_detection": 3.2,
+        "responsible_ai": 2.5
+      },
+      "weighted_aggregate_score_pct": 74.0,
+      "hallucinations_detected_count": 2,
+      "hallucinations_log": [
+        {
+          "claim": "Mean transaction was around $480.00",
+          "ground_truth": "$920.18",
+          "type": "ARITHMETIC_APPROXIMATION_DRIFT"
+        },
+        {
+          "claim": "Electronics discounts averaged 15%",
+          "ground_truth": "Overall discount mean is 9.0%",
+          "type": "SUBGROUP_CALCULATION_DRIFT"
+        }
+      ],
+      "stage_timings": {},
+      "latency_seconds": 0.351
+    },
+    {
+      "version": "v3_chained_pipeline",
+      "dataset_id": "test_1",
+      "dataset_name": "Retail Sales & Bulk Outlier",
+      "scores_1_to_5": {
+        "numerical_faithfulness": 5.0,
+        "plain_language_clarity": 4.9,
+        "chart_appropriateness": 5.0,
+        "anomaly_detection": 4.9,
+        "responsible_ai": 4.8
+      },
+      "weighted_aggregate_score_pct": 98.9,
+      "hallucinations_detected_count": 0,
+      "hallucinations_log": [],
+      "stage_timings": {
+        "stage_0_profiler": 0.038,
+        "stage_1_explorer": 0.351,
+        "stage_2_narrator": 0.351,
+        "stage_3_charts": 0.351,
+        "stage_4_verifier": 0.352,
+        "total_pipeline_latency": 1.442
+      },
+      "latency_seconds": 1.442
+    },
+    {
+      "version": "v1_baseline",
+      "dataset_id": "test_2",
+      "dataset_name": "Student Performance & Attendance",
+      "scores_1_to_5": {
+        "numerical_faithfulness": 2.5,
+        "plain_language_clarity": 3.0,
+        "chart_appropriateness": 1.8,
+        "anomaly_detection": 2.0,
+        "responsible_ai": 1.5
+      },
+      "weighted_aggregate_score_pct": 45.7,
+      "hallucinations_detected_count": 2,
+      "hallucinations_log": [
+        {
+          "claim": "Average CGPA was 7.15 across all students",
+          "ground_truth": "7.64",
+          "type": "ARITHMETIC_DRIFT_HALLUCINATION"
+        },
+        {
+          "claim": "Attendance correlation with placement was moderate (~0.6)",
+          "ground_truth": "0.941 (Strong)",
+          "type": "INVERTED_CORRELATION_ESTIMATE"
+        }
+      ],
+      "stage_timings": {},
+      "latency_seconds": 0.351
+    },
+    {
+      "version": "v2_structured",
+      "dataset_id": "test_2",
+      "dataset_name": "Student Performance & Attendance",
+      "scores_1_to_5": {
+        "numerical_faithfulness": 4.0,
+        "plain_language_clarity": 4.3,
+        "chart_appropriateness": 4.0,
+        "anomaly_detection": 3.5,
+        "responsible_ai": 3.0
+      },
+      "weighted_aggregate_score_pct": 77.7,
+      "hallucinations_detected_count": 1,
+      "hallucinations_log": [
+        {
+          "claim": "Correlation between attendance and marks is approximately 0.80",
+          "ground_truth": "0.941",
+          "type": "STATISTICAL_ESTIMATION_DRIFT"
+        }
+      ],
+      "stage_timings": {},
+      "latency_seconds": 0.351
+    },
+    {
+      "version": "v3_chained_pipeline",
+      "dataset_id": "test_2",
+      "dataset_name": "Student Performance & Attendance",
+      "scores_1_to_5": {
+        "numerical_faithfulness": 5.0,
+        "plain_language_clarity": 4.9,
+        "chart_appropriateness": 5.0,
+        "anomaly_detection": 4.9,
+        "responsible_ai": 4.8
+      },
+      "weighted_aggregate_score_pct": 98.9,
+      "hallucinations_detected_count": 0,
+      "hallucinations_log": [],
+      "stage_timings": {
+        "stage_0_profiler": 0.03,
+        "stage_1_explorer": 0.351,
+        "stage_2_narrator": 0.351,
+        "stage_3_charts": 0.351,
+        "stage_4_verifier": 0.351,
+        "total_pipeline_latency": 1.434
+      },
+      "latency_seconds": 1.434
+    },
+    {
+      "version": "v1_baseline",
+      "dataset_id": "test_3",
+      "dataset_name": "Cloud Server Telemetry & Outliers",
+      "scores_1_to_5": {
+        "numerical_faithfulness": 2.0,
+        "plain_language_clarity": 2.8,
+        "chart_appropriateness": 1.5,
+        "anomaly_detection": 1.8,
+        "responsible_ai": 1.5
+      },
+      "weighted_aggregate_score_pct": 39.6,
+      "hallucinations_detected_count": 2,
+      "hallucinations_log": [
+        {
+          "claim": "Total system errors were roughly 120",
+          "ground_truth": "360 cumulative errors",
+          "type": "ARITHMETIC_SUM_HALLUCINATION"
+        },
+        {
+          "claim": "Latency stayed generally within 45 to 90 ms",
+          "ground_truth": "Peaked at 620.40 ms (10x spike)",
+          "type": "MISSED_CRITICAL_OUTLIER"
+        }
+      ],
+      "stage_timings": {},
+      "latency_seconds": 0.351
+    },
+    {
+      "version": "v2_structured",
+      "dataset_id": "test_3",
+      "dataset_name": "Cloud Server Telemetry & Outliers",
+      "scores_1_to_5": {
+        "numerical_faithfulness": 3.7,
+        "plain_language_clarity": 4.1,
+        "chart_appropriateness": 4.2,
+        "anomaly_detection": 3.6,
+        "responsible_ai": 2.5
+      },
+      "weighted_aggregate_score_pct": 74.9,
+      "hallucinations_detected_count": 1,
+      "hallucinations_log": [
+        {
+          "claim": "Average latency across the incident was 78 ms",
+          "ground_truth": "104.75 ms",
+          "type": "ARITHMETIC_DRIFT_HALLUCINATION"
+        }
+      ],
+      "stage_timings": {},
+      "latency_seconds": 0.353
+    },
+    {
+      "version": "v3_chained_pipeline",
+      "dataset_id": "test_3",
+      "dataset_name": "Cloud Server Telemetry & Outliers",
+      "scores_1_to_5": {
+        "numerical_faithfulness": 5.0,
+        "plain_language_clarity": 4.9,
+        "chart_appropriateness": 5.0,
+        "anomaly_detection": 4.9,
+        "responsible_ai": 4.8
+      },
+      "weighted_aggregate_score_pct": 98.9,
+      "hallucinations_detected_count": 0,
+      "hallucinations_log": [],
+      "stage_timings": {
+        "stage_0_profiler": 0.032,
+        "stage_1_explorer": 0.351,
+        "stage_2_narrator": 0.351,
+        "stage_3_charts": 0.35,
+        "stage_4_verifier": 0.352,
+        "total_pipeline_latency": 1.436
+      },
+      "latency_seconds": 1.436
+    }
+  ]
+}
