@@ -1,0 +1,41 @@
+student_id,department,attendance_pct,study_hours_weekly,internal_marks,final_cgpa,placement_status
+STU-2001,Computer Science,94.5,22,48,9.24,Placed
+STU-2002,Information Technology,88.0,18,44,8.65,Placed
+STU-2003,Mechanical,72.5,10,32,6.80,Not Placed
+STU-2004,Electronics,81.0,15,39,7.92,Placed
+STU-2005,Computer Science,96.0,25,50,9.70,Placed
+STU-2006,Civil,68.0,8,28,6.25,Not Placed
+STU-2007,Information Technology,79.5,14,37,7.45,Placed
+STU-2008,Electronics,85.0,17,42,8.30,Placed
+STU-2009,Mechanical,64.0,6,24,5.90,Not Placed
+STU-2010,Computer Science,91.0,20,46,8.95,Placed
+STU-2011,Civil,75.0,11,34,6.95,Not Placed
+STU-2012,Information Technology,83.5,16,40,7.88,Placed
+STU-2013,Electronics,77.0,12,35,7.10,Placed
+STU-2014,Mechanical,89.0,19,45,8.40,Placed
+STU-2015,Computer Science,98.5,28,49,9.85,Placed
+STU-2016,Civil,62.5,5,22,5.40,Not Placed
+STU-2017,Information Technology,90.0,21,47,9.05,Placed
+STU-2018,Electronics,70.5,9,30,6.55,Not Placed
+STU-2019,Mechanical,78.0,13,36,7.20,Not Placed
+STU-2020,Computer Science,86.5,17,43,8.45,Placed
+STU-2021,Civil,82.0,14,38,7.60,Placed
+STU-2022,Information Technology,74.0,11,33,6.85,Not Placed
+STU-2023,Electronics,92.5,23,48,9.15,Placed
+STU-2024,Mechanical,66.0,7,26,6.10,Not Placed
+STU-2025,Computer Science,93.0,22,46,8.90,Placed
+STU-2026,Civil,71.0,9,31,6.45,Not Placed
+STU-2027,Information Technology,87.5,18,44,8.55,Placed
+STU-2028,Electronics,84.0,16,41,8.12,Placed
+STU-2029,Mechanical,80.5,15,38,7.50,Placed
+STU-2030,Computer Science,95.0,24,49,9.40,Placed
+STU-2031,Civil,59.0,4,20,5.15,Not Placed
+STU-2032,Information Technology,82.0,15,39,7.75,Placed
+STU-2033,Electronics,73.5,10,32,6.70,Not Placed
+STU-2034,Mechanical,76.5,12,35,7.05,Not Placed
+STU-2035,Computer Science,89.5,19,45,8.75,Placed
+STU-2036,Civil,67.0,8,29,6.30,Not Placed
+STU-2037,Information Technology,94.0,23,48,9.30,Placed
+STU-2038,Electronics,88.5,19,43,8.60,Placed
+STU-2039,Mechanical,71.5,10,31,6.65,Not Placed
+STU-2040,Computer Science,97.0,26,50,9.65,Placed
