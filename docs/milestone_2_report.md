@@ -18,9 +18,12 @@
 
 | # | Name | Enrollment Number |
 |---|------|-------------------|
-| 1 | _[Team Leader Name]_ | _S24CSEU_____ |
-| 2 | _[Member 2 Name]_ | _S24CSEU_____ |
-| 3 | _[Member 3 Name]_ | _S24CSEU_____ |
+| 1 | Aditya Singh (Team Leader) | S24CSEU____ |
+| 2 | [Member 2 Name] | S24CSEU____ |
+| 3 | [Member 3 Name] | S24CSEU____ |
+| 4 | [Member 4 Name] | S24CSEU____ |
+| 5 | [Member 5 Name] | S24CSEU____ |
+| 6 | [Member 6 Name] | S24CSEU____ |
 
 **Submission Links:**
 1. **Prototype Link**: [https://adityasingh6533-c21-data-analysis-report-writer-app-bxvkvg.streamlit.app/](https://adityasingh6533-c21-data-analysis-report-writer-app-bxvkvg.streamlit.app/)
@@ -525,6 +528,9 @@ _[Paste the contents of your Technical Report (docs/technical_synopsis.md) here 
 
 | Member Name | Enrollment No. | Role | Tasks Done in Milestone 2 | Evidence | Contribution (%) |
 |------------|----------------|------|--------------------------|----------|------------------|
-| _[Name 1]_ | _S24CSEU_____ | Lead Prompt Engineer & System Architect | Designed 4-stage chained prompt pipeline; wrote P1, P2, P3, P4 prompt templates; iterated v1 → v2 → v3 with documented results; authored Milestone 2 PDF Sections 2 and 3 | `prompts/v3_chained_pipeline/01-04*.md`, `prompts/v1_baseline/`, `prompts/v2_structured/`, 6+ git commits | 35 |
-| _[Name 2]_ | _S24CSEU_____ | Backend & Tools Developer | Built deterministic CSV profiler (`tool_csv_profiler.py`); implemented PII redaction engine; built prompt chain runner (`prompt_chain_runner.py`) with Gemini API integration and mock mode; integrated all pipeline stages | `src/tool_csv_profiler.py`, `src/prompt_chain_runner.py`, `requirements.txt`, 5+ git commits | 35 |
-| _[Name 3]_ | _S24CSEU_____ | Evaluation & UI Developer | Built Streamlit dashboard (`app.py`) with 4 interactive tabs; created evaluation harness (`evaluation/run_evaluation.py`); generated benchmark logs and error analysis report; recorded video reel; created diagrams | `app.py`, `evaluation/`, `docs/contribution_log.md`, video reel, 4+ git commits | 30 |
+| Aditya Singh (Lead) | S24CSEU____ | System Architect & Lead Prompt Engineer | Designed 4-stage chained prompt pipeline; authored P1 (Schema & Anomaly Explorer) and P4 (Number Verifier & Auditor) templates; coordinated Milestone 2 report and changelog | `prompts/v3_chained_pipeline/01_*.md`, `prompts/v3_chained_pipeline/04_*.md`, `docs/milestone_2_report.md` | 20 |
+| [Member 2 Name] | S24CSEU____ | Prompt Engineer & Narrative Specialist | Authored P2 (Plain-Language Narrative Synthesizer) with few-shot domain translation examples; designed v2 structured role prompt with negative constraints | `prompts/v3_chained_pipeline/02_plain_language_narrator.md`, `prompts/v2_structured/` | 16 |
+| [Member 3 Name] | S24CSEU____ | Visualization & Schema Architect | Authored P3 (Structured Chart Recommender) adhering to Wilkinson's Grammar of Graphics; validated Plotly dynamic visual generation logic | `prompts/v3_chained_pipeline/03_chart_recommender_schema.md`, `app.py` | 16 |
+| [Member 4 Name] | S24CSEU____ | Backend Tools & Privacy Engineer | Developed deterministic CSV profiler (`tool_csv_profiler.py`), statistical math routines (IQR bounds, Pearson r), and Responsible AI PII regex redaction | `src/tool_csv_profiler.py`, `src/prompt_chain_runner.py` | 16 |
+| [Member 5 Name] | S24CSEU____ | Evaluation & Testing Lead | Developed 5-metric evaluation harness (`run_evaluation.py`); executed 9 benchmark experiments across 3 stress-test datasets; generated error taxonomy report | `evaluation/run_evaluation.py`, `evaluation/experiment_logs.json`, `evaluation/error_analysis_report.md` | 16 |
+| [Member 6 Name] | S24CSEU____ | UI Developer & Demonstration Lead | Built 4-tab Streamlit application (`app.py`), deployed live prototype on Streamlit Community Cloud, recorded and edited the 120-second video demo reel | `app.py`, `docs/contribution_log.md`, Video Reel Link | 16 |
