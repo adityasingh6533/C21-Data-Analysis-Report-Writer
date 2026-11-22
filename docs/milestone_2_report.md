@@ -23,8 +23,8 @@
 | 3 | _[Member 3 Name]_ | _S24CSEU_____ |
 
 **Submission Links:**
-1. **Prototype Link**: _[Deployed Streamlit App URL]_
-2. **GitHub Repository**: _[Public GitHub URL]_
+1. **Prototype Link**: [https://adityasingh6533-c21-data-analysis-report-writer-app-bxvkvg.streamlit.app/](https://adityasingh6533-c21-data-analysis-report-writer-app-bxvkvg.streamlit.app/)
+2. **GitHub Repository**: [https://github.com/adityasingh6533/C21-Data-Analysis-Report-Writer](https://github.com/adityasingh6533/C21-Data-Analysis-Report-Writer)
 3. **Video Reel**: _[Google Drive / YouTube Unlisted URL]_ | Duration: _[___]_ seconds
 
 ---

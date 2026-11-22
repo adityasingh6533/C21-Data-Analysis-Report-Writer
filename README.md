@@ -125,9 +125,9 @@ The project includes three realistic synthetic benchmark datasets specifically c
 
 | Resource | Link |
 |----------|------|
-| **Live Prototype** | _[Add deployed Streamlit app URL here]_ |
-| **GitHub Repository** | _[This repository]_ |
-| **Video Reel** | _[Add Google Drive or YouTube unlisted link here]_ |
+| **Live Prototype** | [https://adityasingh6533-c21-data-analysis-report-writer-app-bxvkvg.streamlit.app/](https://adityasingh6533-c21-data-analysis-report-writer-app-bxvkvg.streamlit.app/) |
+| **GitHub Repository** | [https://github.com/adityasingh6533/C21-Data-Analysis-Report-Writer](https://github.com/adityasingh6533/C21-Data-Analysis-Report-Writer) |
+| **Video Reel** | _[Google Drive / YouTube unlisted link]_ |
 
 ---
 
