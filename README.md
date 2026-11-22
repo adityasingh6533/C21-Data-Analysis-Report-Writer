@@ -121,6 +121,35 @@ The project includes three realistic synthetic benchmark datasets specifically c
 
 ---
 
+## 🔗 Quick Links
+
+| Resource | Link |
+|----------|------|
+| **Live Prototype** | _[Add deployed Streamlit app URL here]_ |
+| **GitHub Repository** | _[This repository]_ |
+| **Video Reel** | _[Add Google Drive or YouTube unlisted link here]_ |
+
+---
+
+## 🚀 How to Run
+
+```bash
+# 1. Clone the repository
+git clone <repository-url>
+cd C21-Data-Analysis-Report-Writer
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run the Streamlit dashboard
+streamlit run app.py
+```
+
+> **Note**: The app starts in **Demo Mode** by default — no API key needed.  
+> To use live Gemini API, enter your API key in the sidebar or set `GEMINI_API_KEY` in a `.env` file.
+
+---
+
 ## 👥 Contributors & Academic Context
 Developed as part of the Advanced Prompt Engineering & Agentic Systems Curriculum.  
 **Problem ID**: C21 ("Data analysis report writer").
