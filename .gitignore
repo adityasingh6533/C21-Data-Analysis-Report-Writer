@@ -32,3 +32,6 @@ wheels/
 .idea/
 *.swp
 *.swo
+
+# Temporary datasets
+datasets/_temp_*.csv
