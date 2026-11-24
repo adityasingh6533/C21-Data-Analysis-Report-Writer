@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeriSight AI — Milestone 2 Presentation (90-150s Reel)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+        :root {
+            --bg: #090d16;
+            --surface: #111827;
+            --surface-card: #1a2234;
+            --border: #26334d;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-rose: #f43f5e;
+            --accent-amber: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+
+        /* Top control bar */
+        .topbar {
+            height: 52px;
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 50;
+        }
+
+        .brand {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .badge-tag {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .timer-box {
+            font-family: 'JetBrains Mono', monospace;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            padding: 4px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timer-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 6px;
+        }
+
+        .timer-btn:hover {
+            color: white;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        /* Slide Stage */
+        .stage {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 60px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            max-width: 1200px;
+            height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px) scale(0.98);
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        .slide-header {
+            margin-bottom: 24px;
+        }
+
+        .part-indicator {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slide-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* Cards & Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-danger {
+            border-color: rgba(244, 63, 94, 0.4);
+            background: linear-gradient(180deg, rgba(244, 63, 94, 0.08) 0%, rgba(26, 34, 52, 0.9) 100%);
+        }
+
+        .card-success {
+            border-color: rgba(16, 185, 129, 0.4);
+            background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(26, 34, 52, 0.9) 100%);
+        }
+
+        .card-accent {
+            border-color: rgba(59, 130, 246, 0.4);
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.08) 0%, rgba(26, 34, 52, 0.9) 100%);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .metric-big {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            margin: 6px 0;
+        }
+
+        .metric-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Script prompt bar */
+        .teleprompter-box {
+            margin-top: 20px;
+            background: rgba(15, 23, 42, 0.9);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: 0 10px 10px 0;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .teleprompter-icon {
+            font-size: 1.2rem;
+        }
+
+        .teleprompter-text {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .teleprompter-text strong {
+            color: #38bdf8;
+            font-style: normal;
+        }
+
+        /* Workflow diagram pills */
+        .pipeline-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 15px 0;
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+        }
+
+        .flow-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            color: white;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+        }
+
+        .flow-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .flow-meta {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .flow-arrow {
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+            opacity: 0.6;
+        }
+
+        /* Bottom timeline progress */
+        .bottom-timeline {
+            height: 28px;
+            display: flex;
+            align-items: center;
+            padding: 0 60px;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .timeline-seg {
+            height: 4px;
+            flex: 1;
+            background: #1e293b;
+            border-radius: 2px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .timeline-seg.done {
+            background: var(--accent-blue);
+        }
+
+        .timeline-seg.active {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 12px var(--accent-cyan);
+            height: 6px;
+        }
+
+        .timeline-label {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* Code block style */
+        .code-snippet {
+            font-family: 'JetBrains Mono', monospace;
+            background: #090e17;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            color: #cbd5e1;
+        }
+
+        .code-snippet .err { color: #f87171; font-weight: 700; }
+        .code-snippet .ok { color: #34d399; font-weight: 700; }
+        .code-snippet .hl { color: #60a5fa; }
+    </style>
+</head>
+<body>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="brand">
+            <span>🔍 VeriSight AI</span>
+            <span class="badge-tag">Problem ID: C21</span>
+            <span class="badge-tag" style="background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.3); color:#34d399;">Milestone 2</span>
+        </div>
+
+        <!-- Stop watch for reel recording -->
+        <div class="timer-box">
+            <span>⏱️ REEL TIMER:</span>
+            <span id="timerDisplay">00:00</span>
+            <span style="font-size:0.75rem; color:#64748b;">(Target: 90-150s)</span>
+            <button class="timer-btn" onclick="toggleTimer()">▶/⏸</button>
+            <button class="timer-btn" onclick="resetTimer()">↺</button>
+        </div>
+
+        <div class="nav-controls">
+            <span id="slideIndicator" style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">Slide 1 / 6</span>
+            <button class="btn-nav" onclick="prevSlide()">◀ Prev</button>
+            <button class="btn-nav" onclick="nextSlide()">Next ▶</button>
+            <button class="btn-nav" style="background:#0284c7;" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+        </div>
+    </div>
+
+    <!-- MAIN SLIDE STAGE -->
+    <div class="stage">
+
+        <!-- SLIDE 1: TITLE & HOOK -->
+        <div class="slide active" id="slide-1">
+            <div class="slide-header">
+                <div class="part-indicator">🎬 PART 1: THE PROBLEM & HOOK [~10 SECONDS]</div>
+                <h1 class="slide-title">VeriSight AI: Eliminating LLM Math Hallucinations in CSV Data</h1>
+                <p class="slide-desc">Tool-Assisted, 4-Stage Chained Prompt Architecture with Closed-Loop Self-Verification | Problem ID: C21</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card card-danger">
+                    <div class="card-title" style="color: #f87171;">⚠️ The Core Challenge: LLM Math Blindness</div>
+                    <p>Foundation models predict next-tokens statistically. When fed tabular CSV dumps, they do mental math: hallucinating averages, inventing correlations, and missing critical anomalies.</p>
+                    <div style="margin-top: 14px;" class="code-snippet">
+                        <span class="err">❌ Naive Prompting:</span> Raw 35 rows &rarr; LLM guesses average revenue: <strong>$340.50</strong><br>
+                        <span class="ok">✓ Ground Truth:</span> True average is <strong>$920.18</strong> (due to $18,750 bulk outlier!)
+                    </div>
+                </div>
+
+                <div class="card card-success">
+                    <div class="card-title" style="color: #34d399;">💡 Our Solution: VeriSight AI (C21)</div>
+                    <p>A tool-assisted pipeline that decouples calculation from writing: a deterministic Python profiler calculates ground truth, feeding into a 4-stage chained prompt engine with closed-loop verification.</p>
+                    <div style="margin-top: 14px;" class="code-snippet">
+                        <span class="hl">🎯 Primary Target:</span> Students, Junior Data Analysts, Non-Technical Managers<br>
+                        <span class="hl">🔒 Guarantee:</span> 100% Numerical Faithfulness (Zero Arithmetic Hallucination)
+                    </div>
+                </div>
+            </div>
+
+            <div class="teleprompter-box">
+                <span class="teleprompter-icon">🎙️</span>
+                <span class="teleprompter-text">
+                    <strong>VOICEOVER [0:00 - 0:15]:</strong> "If you paste a spreadsheet into ChatGPT and ask for the average, it won't calculate it—it guesses it. In tabular data, this causes silent, dangerous mathematical hallucinations. We built <strong>VeriSight AI</strong> for Problem ID C21: a tool-assisted 4-stage chained prompt pipeline that guarantees zero arithmetic hallucinations."
+                </span>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: PROMPT EXPERIMENT (BEFORE VS AFTER) -->
+        <div class="slide" id="slide-2">
+            <div class="slide-header">
+                <div class="part-indicator">🔬 PART 2: PROMPT EXPERIMENT & ITERATION [~30-40 SECONDS]</div>
+                <h1 class="slide-title">Prompt Engineering Evolution: v1 Baseline vs. v3 Pipeline</h1>
+                <p class="slide-desc">How systematic prompt decomposition elevated performance from 41.5% to 98.9%</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card card-danger">
+                    <div class="card-title" style="color:#f87171;">Version 1.0: Baseline</div>
+                    <div class="metric-big" style="color:#f87171;">41.5%</div>
+                    <div class="metric-sub">Single-shot Monolithic Prompt</div>
+                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:10px 0;">
+                    <p>• Hallucinated mean: $340.50 vs $920.18<br>
+                    • Lost-in-the-middle attention failure<br>
+                    • Suggested pie chart for 15 items<br>
+                    • 6 critical hallucinations logged</p>
+                </div>
+
+                <div class="card" style="border-color: rgba(245,158,11,0.4); background: linear-gradient(180deg, rgba(245,158,11,0.08) 0%, rgba(26,34,52,0.9) 100%);">
+                    <div class="card-title" style="color:#fbbf24;">Version 2.0: Structured</div>
+                    <div class="metric-big" style="color:#fbbf24;">75.5%</div>
+                    <div class="metric-sub">Persona + Negative Constraints + 1-Shot</div>
+                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:10px 0;">
+                    <p>• Added Senior Data Journalist persona<br>
+                    • JSON chart block parseable<br>
+                    • Still drifted on correlation (0.80 vs 0.941)<br>
+                    • Cognitive overload & schema bleed</p>
+                </div>
+
+                <div class="card card-success">
+                    <div class="card-title" style="color:#34d399;">Version 3.0: VeriSight Pipeline</div>
+                    <div class="metric-big" style="color:#34d399;">98.9%</div>
+                    <div class="metric-sub">4-Stage Chained + Code Profiler</div>
+                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:10px 0;">
+                    <p>• <strong>100% Numerical Faithfulness</strong><br>
+                    • Grammar of Graphics strict JSON<br>
+                    • Zero hallucinations across 3 datasets<br>
+                    • Automated PII masking & bias alerts</p>
+                </div>
+            </div>
+
+            <div class="teleprompter-box">
+                <span class="teleprompter-icon">🎙️</span>
+                <span class="teleprompter-text">
+                    <strong>VOICEOVER [0:15 - 0:45]:</strong> "In our prompt experiment, our naive v1 baseline scored only 41.5%—missing an $18,000 bulk order entirely and underestimating revenue by 63%. In v2, role prompting improved formatting to 75.5%, but correlation estimation still drifted. In v3, we decoupled math into a deterministic profiler and chained 4 specialized prompts. The result? <strong>98.9% overall score and 100% numerical accuracy with zero hallucinations.</strong>"
+                </span>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: SYSTEM ARCHITECTURE & 4 STAGES -->
+        <div class="slide" id="slide-3">
+            <div class="slide-header">
+                <div class="part-indicator">🏗️ ARCHITECTURE & PROMPT PIPELINE</div>
+                <h1 class="slide-title">4-Stage Chained Prompt Pipeline with Closed-Loop Verification</h1>
+                <p class="slide-desc">Task decomposition eliminates cognitive overload by isolating specialized reasoning stages</p>
+            </div>
+
+            <div class="pipeline-flow">
+                <div class="flow-step">
+                    <div class="flow-num" style="background:#eab308;">0</div>
+                    <div class="flow-name">Code Profiler</div>
+                    <div class="flow-meta">Pandas/NumPy exact stats</div>
+                    <div class="flow-meta">PII Redacted</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step">
+                    <div class="flow-num">1</div>
+                    <div class="flow-name">Anomaly Explorer</div>
+                    <div class="flow-meta">Temp: 0.1 | Strict JSON</div>
+                    <div class="flow-meta">Forensic Diagnosis</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step">
+                    <div class="flow-num">2</div>
+                    <div class="flow-name">Narrator Prompt</div>
+                    <div class="flow-meta">Temp: 0.3 | Markdown</div>
+                    <div class="flow-meta">Plain-Language Story</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step">
+                    <div class="flow-num">3</div>
+                    <div class="flow-name">Chart Recommender</div>
+                    <div class="flow-meta">Temp: 0.1 | JSON Array</div>
+                    <div class="flow-meta">Grammar of Graphics</div>
+                </div>
+                <div class="flow-arrow">&rarr;</div>
+                <div class="flow-step">
+                    <div class="flow-num" style="background:#10b981;">4</div>
+                    <div class="flow-name">Number Verifier</div>
+                    <div class="flow-meta">Temp: 0.0 | Adversarial</div>
+                    <div class="flow-meta">Auto-Correction Loop</div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card card-accent">
+                    <div class="card-title">🔍 Stage 4: Closed-Loop Verification (Core C21 Mandate)</div>
+                    <p>Stage 4 acts as an adversarial fact-checker: it parses every numerical claim, percentage, and currency token in Stage 2's prose, cross-referencing it against Stage 0's ground truth. If any hallucination or drift is found, it autonomously triggers self-correction before report presentation.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🛡️ Responsible AI & Ethical Guardrails</div>
+                    <p>• <strong>Pre-LLM PII Sanitization</strong>: Regex scanner redacts emails, phone numbers, and identity IDs before tokens hit the LLM.<br>
+                    • <strong>Sample Size Warnings</strong>: Triggers automated advisory when sample size N &lt; 30.<br>
+                    • <strong>Verification Badges</strong>: Displays auditable 100% verified ledger in UI.</p>
+                </div>
+            </div>
+
+            <div class="teleprompter-box">
+                <span class="teleprompter-icon">🎙️</span>
+                <span class="teleprompter-text">
+                    <strong>VOICEOVER [0:45 - 1:05]:</strong> "Stage 0 profiles the data and masks PII. Stage 1 diagnoses distribution skew and outliers. Stage 2 crafts an executive narrative with zero jargon. Stage 3 generates Grammar of Graphics chart specifications. And Stage 4—our adversarial fact-checker—audits every single number against ground truth, guaranteeing an airtight audit trail."
+                </span>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: WORKING DEMO OVERVIEW -->
+        <div class="slide" id="slide-4">
+            <div class="slide-header">
+                <div class="part-indicator">💻 PART 3: LIVE WORKING DEMO [~40-60 SECONDS]</div>
+                <h1 class="slide-title">Interactive Streamlit Web Dashboard: Live Execution</h1>
+                <p class="slide-desc">Deployed 24/7 on Streamlit Community Cloud with Plotly visualizations and live trace inspection</p>
+            </div>
+
+            <div class="grid-4">
+                <div class="card">
+                    <div style="font-size:1.8rem; margin-bottom:6px;">📋</div>
+                    <div class="card-title" style="font-size:0.95rem;">Tab 1: Executive Report</div>
+                    <p style="font-size:0.82rem;">Displays verified narrative, 100% verification badge, PII status, and dynamic Plotly charts.</p>
+                </div>
+
+                <div class="card">
+                    <div style="font-size:1.8rem; margin-bottom:6px;">🔗</div>
+                    <div class="card-title" style="font-size:0.95rem;">Tab 2: Chain Inspector</div>
+                    <p style="font-size:0.82rem;">Inspect raw intermediate JSON and Markdown artifacts passed between all 4 stages live.</p>
+                </div>
+
+                <div class="card">
+                    <div style="font-size:1.8rem; margin-bottom:6px;">🔬</div>
+                    <div class="card-title" style="font-size:0.95rem;">Tab 3: Iteration Lab</div>
+                    <p style="font-size:0.82rem;">Side-by-side comparative inspection of v1.0 vs v2.0 vs v3.0 prompt architecture and outputs.</p>
+                </div>
+
+                <div class="card">
+                    <div style="font-size:1.8rem; margin-bottom:6px;">📊</div>
+                    <div class="card-title" style="font-size:0.95rem;">Tab 4: Evaluation</div>
+                    <p style="font-size:0.82rem;">Grouped bar charts and rubric breakdowns across 9 empirical stress-test experiments.</p>
+                </div>
+            </div>
+
+            <div style="margin-top:16px; background:#0f172a; border:1px solid var(--border); border-radius:10px; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <span style="font-size:0.85rem; color:var(--text-muted);">🌐 Live Prototype URL:</span><br>
+                    <span style="font-family:'JetBrains Mono'; font-size:0.9rem; color:var(--accent-cyan);">https://adityasingh6533-c21-data-analysis-report-writer-app-bxvkvg.streamlit.app/</span>
+                </div>
+                <span class="badge-tag" style="background:#10b981; color:white; font-size:0.8rem;">● Live & Verified</span>
+            </div>
+
+            <div class="teleprompter-box">
+                <span class="teleprompter-icon">🎙️</span>
+                <span class="teleprompter-text">
+                    <strong>VOICEOVER [1:05 - 1:45]:</strong> <em>[Switch to live Streamlit screen recording here!]</em> "Here is VeriSight AI running live on Streamlit Cloud. In Tab 1, we see the executive report: typical orders center around $360 median, while the $18,750 outlier is cleanly flagged. Plotly charts render dynamically from Stage 3's JSON. In Tab 2, evaluators can inspect intermediate artifacts for every stage. And in Tab 4, empirical rubric logs prove 100% numerical faithfulness across retail, student, and server log datasets."
+                </span>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: BENCHMARK RESULTS & METRICS -->
+        <div class="slide" id="slide-5">
+            <div class="slide-header">
+                <div class="part-indicator">📊 EMPIRICAL BENCHMARKING</div>
+                <h1 class="slide-title">Quantitative Evaluation Across 5 Rubric Dimensions</h1>
+                <p class="slide-desc">Aggregated results across 9 experiments (3 prompt versions × 3 benchmark datasets)</p>
+            </div>
+
+            <table style="width:100%; border-collapse:collapse; background:var(--surface-card); border:1px solid var(--border); border-radius:10px; overflow:hidden;">
+                <thead>
+                    <tr style="background:#0f172a; border-bottom:1px solid var(--border); text-align:left;">
+                        <th style="padding:10px 14px; font-size:0.85rem;">Dimension</th>
+                        <th style="padding:10px 14px; font-size:0.85rem;">Weight</th>
+                        <th style="padding:10px 14px; font-size:0.85rem; color:#f87171;">v1.0 Baseline</th>
+                        <th style="padding:10px 14px; font-size:0.85rem; color:#fbbf24;">v2.0 Structured</th>
+                        <th style="padding:10px 14px; font-size:0.85rem; color:#34d399;">v3.0 Chained</th>
+                        <th style="padding:10px 14px; font-size:0.85rem; color:#60a5fa;">Impact</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size:0.88rem; color:#cbd5e1;">
+                    <tr style="border-bottom:1px solid #1e293b;">
+                        <td style="padding:10px 14px; font-weight:600;">1. Numerical Faithfulness</td>
+                        <td style="padding:10px 14px;">35%</td>
+                        <td style="padding:10px 14px;">2.2 / 5 (44.6%)</td>
+                        <td style="padding:10px 14px;">3.8 / 5 (76.6%)</td>
+                        <td style="padding:10px 14px; font-weight:700; color:#34d399;">5.0 / 5 (100%)</td>
+                        <td style="padding:10px 14px; color:#34d399;">+55.4%</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #1e293b;">
+                        <td style="padding:10px 14px; font-weight:600;">2. Plain-Language Clarity</td>
+                        <td style="padding:10px 14px;">20%</td>
+                        <td style="padding:10px 14px;">2.9 / 5 (57.4%)</td>
+                        <td style="padding:10px 14px;">4.2 / 5 (84.0%)</td>
+                        <td style="padding:10px 14px; font-weight:700; color:#34d399;">4.9 / 5 (98.0%)</td>
+                        <td style="padding:10px 14px; color:#34d399;">+40.6%</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #1e293b;">
+                        <td style="padding:10px 14px; font-weight:600;">3. Chart Validity & Grammar</td>
+                        <td style="padding:10px 14px;">20%</td>
+                        <td style="padding:10px 14px;">1.6 / 5 (32.0%)</td>
+                        <td style="padding:10px 14px;">4.1 / 5 (81.4%)</td>
+                        <td style="padding:10px 14px; font-weight:700; color:#34d399;">5.0 / 5 (100%)</td>
+                        <td style="padding:10px 14px; color:#34d399;">+68.0%</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #1e293b;">
+                        <td style="padding:10px 14px; font-weight:600;">4. Anomaly & Hygiene Detection</td>
+                        <td style="padding:10px 14px;">15%</td>
+                        <td style="padding:10px 14px;">1.8 / 5 (35.4%)</td>
+                        <td style="padding:10px 14px;">3.4 / 5 (68.6%)</td>
+                        <td style="padding:10px 14px; font-weight:700; color:#34d399;">4.9 / 5 (98.0%)</td>
+                        <td style="padding:10px 14px; color:#34d399;">+62.6%</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #1e293b;">
+                        <td style="padding:10px 14px; font-weight:600;">5. Responsible AI Compliance</td>
+                        <td style="padding:10px 14px;">10%</td>
+                        <td style="padding:10px 14px;">1.3 / 5 (26.6%)</td>
+                        <td style="padding:10px 14px;">2.7 / 5 (53.4%)</td>
+                        <td style="padding:10px 14px; font-weight:700; color:#34d399;">4.8 / 5 (96.0%)</td>
+                        <td style="padding:10px 14px; color:#34d399;">+69.4%</td>
+                    </tr>
+                    <tr style="background:#090e17; font-weight:700;">
+                        <td style="padding:10px 14px; color:white;">OVERALL BENCHMARK SCORE</td>
+                        <td style="padding:10px 14px;">100%</td>
+                        <td style="padding:10px 14px; color:#f87171;">41.5%</td>
+                        <td style="padding:10px 14px; color:#fbbf24;">75.5%</td>
+                        <td style="padding:10px 14px; color:#34d399; font-size:1.05rem;">98.9%</td>
+                        <td style="padding:10px 14px; color:#34d399;">+57.4% LIFT</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="teleprompter-box">
+                <span class="teleprompter-icon">🎙️</span>
+                <span class="teleprompter-text">
+                    <strong>VOICEOVER [1:45 - 1:55]:</strong> "Across all 9 benchmark runs, our overall composite score jumped by +57.4%, lifting chart validity to 100% and completely eliminating ungrounded math hallucinations."
+                </span>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: PROGRESS & NEXT STEPS -->
+        <div class="slide" id="slide-6">
+            <div class="slide-header">
+                <div class="part-indicator">🚀 PART 4: PROGRESS & NEXT STEPS [~15-20 SECONDS]</div>
+                <h1 class="slide-title">Current Milestone 2 Status & Milestone 3 Roadmap</h1>
+                <p class="slide-desc">Delivered for Problem ID C21 | Galgotias University SCSE4041</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card card-success">
+                    <div class="card-title" style="color:#34d399;">✅ Milestone 2 Accomplishments</div>
+                    <p style="font-size:0.9rem; line-height:1.6;">
+                    • Deployed working Streamlit prototype with live Plotly rendering.<br>
+                    • Engineered 4-stage chained prompt pipeline with Gemini 2.5 Flash.<br>
+                    • Built deterministic profiler with automated PII masking.<br>
+                    • Created 12-case test suite with documented normal, edge, and invalid tests.<br>
+                    • Published open-source GitHub repository with full changelog.
+                    </p>
+                </div>
+
+                <div class="card card-accent">
+                    <div class="card-title" style="color:#60a5fa;">🎯 Planned for Milestone 3</div>
+                    <p style="font-size:0.9rem; line-height:1.6;">
+                    • <strong>Multi-Table SQL & Joins</strong>: Expanding beyond single CSVs to relational multi-table datasets.<br>
+                    • <strong>Real-Time Streaming Analysis</strong>: Integrating Gemini Live API for voice-driven conversational querying.<br>
+                    • <strong>One-Click Executive Deck Export</strong>: Direct export to presentation-ready PPTX and PDF briefs.
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top:16px; background:#0f172a; border:1px solid var(--border); border-radius:10px; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="font-size:0.9rem; color:var(--text-muted);">
+                    <strong>VeriSight AI Team</strong> • Problem ID: C21 • SCSE4041 Prompt Engineering
+                </div>
+                <div style="font-family:'JetBrains Mono'; font-size:0.85rem; color:var(--accent-cyan);">
+                    GitHub: adityasingh6533/C21-Data-Analysis-Report-Writer
+                </div>
+            </div>
+
+            <div class="teleprompter-box">
+                <span class="teleprompter-icon">🎙️</span>
+                <span class="teleprompter-text">
+                    <strong>VOICEOVER [1:55 - 2:05]:</strong> "Milestone 2 is complete: prototype deployed, prompts benchmarked, and fact-checking fully operational. For Milestone 3, we plan to add relational table joins and real-time voice querying with the Gemini Live API. Thank you!"
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BOTTOM PROGRESS TIMELINE -->
+    <div class="bottom-timeline">
+        <div class="timeline-seg active" onclick="goToSlide(0)"><span class="timeline-label">1. Hook (~10s)</span></div>
+        <div class="timeline-seg" onclick="goToSlide(1)"><span class="timeline-label">2. Experiment (~35s)</span></div>
+        <div class="timeline-seg" onclick="goToSlide(2)"><span class="timeline-label">3. Architecture</span></div>
+        <div class="timeline-seg" onclick="goToSlide(3)"><span class="timeline-label">4. Demo (~50s)</span></div>
+        <div class="timeline-seg" onclick="goToSlide(4)"><span class="timeline-label">5. Benchmarks</span></div>
+        <div class="timeline-seg" onclick="goToSlide(5)"><span class="timeline-label">6. Roadmap (~15s)</span></div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const timelineSegs = document.querySelectorAll('.timeline-seg');
+        const indicator = document.getElementById('slideIndicator');
+
+        function updateSlideUI() {
+            slides.forEach((s, idx) => {
+                s.classList.toggle('active', idx === currentSlide);
+            });
+            timelineSegs.forEach((seg, idx) => {
+                seg.classList.toggle('done', idx < currentSlide);
+                seg.classList.toggle('active', idx === currentSlide);
+            });
+            indicator.innerText = `Slide ${currentSlide + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlideUI();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlideUI();
+            }
+        }
+
+        function goToSlide(idx) {
+            currentSlide = idx;
+            updateSlideUI();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                prevSlide();
+            }
+        });
+
+        // Fullscreen toggle
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Reel Timer logic
+        let timerSeconds = 0;
+        let timerInterval = null;
+        const timerDisplay = document.getElementById('timerDisplay');
+
+        function toggleTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            } else {
+                timerInterval = setInterval(() => {
+                    timerSeconds++;
+                    const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+                    const secs = String(timerSeconds % 60).padStart(2, '0');
+                    timerDisplay.innerText = `${mins}:${secs}`;
+
+                    // Visual alerts
+                    if (timerSeconds >= 90 && timerSeconds <= 150) {
+                        timerDisplay.style.color = '#34d399'; // Green in range
+                    } else if (timerSeconds > 150) {
+                        timerDisplay.style.color = '#f87171'; // Red over range
+                    } else {
+                        timerDisplay.style.color = '#38bdf8'; // Blue starting
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timerSeconds = 0;
+            timerDisplay.innerText = "00:00";
+            timerDisplay.style.color = '#38bdf8';
+        }
+    </script>
+</body>
+</html>
